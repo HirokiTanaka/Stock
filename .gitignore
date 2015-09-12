@@ -1,0 +1,15 @@
+# logs
+*.log
+
+# pids
+*.pid
+*.seed
+
+# for Windows
+Thumbs.db
+Desktop.ini
+
+
+# for OSX
+.DS_Store
+
