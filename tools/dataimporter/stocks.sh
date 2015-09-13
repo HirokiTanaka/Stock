@@ -21,10 +21,8 @@ rm ${workdir}/${target}.sjis.csv
 # remove header lines
 sed -i -e '1,2d' ${workdir}/${target}.csv
 
-# append date column
-sed -i -e "s/^/${target},/g" ${workdir}/${target}.csv
-
 # upload to s3
-hadoop fs -put ${workdir}/${target}.csv s3n://hirokitanaka-stock/hdfs/data/stocks/${target}.csv
+hadoop fs -mkdir s3n://hirokitanaka-stock/hdfs/data/stocks/${target}
+hadoop fs -put ${workdir}/${target}.csv s3n://hirokitanaka-stock/hdfs/data/stocks/${target}/${target}.csv
 rm ${workdir}/${target}.csv
 
