@@ -25,6 +25,6 @@ sed -i -e '1,2d' ${workdir}/${target}.csv
 sed -i -e "s/^/${target},/g" ${workdir}/${target}.csv
 
 # upload to s3
-aws s3 cp ${workdir}/${target}.csv s3://hirokitanaka-stock/data/stocks/${target}.csv
+hadoop fs -put ${workdir}/${target}.csv s3n://hirokitanaka-stock/hdfs/data/stocks/${target}.csv
 rm ${workdir}/${target}.csv
 
