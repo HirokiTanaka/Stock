@@ -1,0 +1,3 @@
+{
+  "stock_table_location_dir": "s3n://hirokitanaka-stock/hdfs/data/stocks"
+}
