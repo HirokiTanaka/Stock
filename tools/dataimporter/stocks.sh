@@ -17,9 +17,11 @@ wget http://k-db.com/stocks/${target}?download=csv -O ${workdir}/${target}.sjis.
 # convert charactor code sjis to utf-8
 iconv -f Shift-JIS -t UTF-8 ${workdir}/${target}.sjis.csv -o ${workdir}/${target}.csv
 rm ${workdir}/${target}.sjis.csv
+echo 'finished to convert charactor code from sjis to utf-8.'
 
 # remove header lines
 sed -i -e '1,2d' ${workdir}/${target}.csv
+echo 'finished to remove header lines.'
 
 # upload to s3
 hadoop fs -mkdir s3n://hirokitanaka-stock/hdfs/data/stocks/${target}
