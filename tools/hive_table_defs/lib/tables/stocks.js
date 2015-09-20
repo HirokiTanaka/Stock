@@ -21,7 +21,7 @@ var stocks = function() {
     ROW FORMAT
       DELIMITED
         FIELDS TERMINATED BY ','
-        LINES TERMINATED BY '\n'
+        LINES TERMINATED BY '\\n'
     ;
     */).unindent();
     return scripts;
