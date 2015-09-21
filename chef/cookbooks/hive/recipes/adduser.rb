@@ -7,8 +7,8 @@ user "#{node.hadoop.user.name}" do
 end
 
 # add him to wheel group and let him be a sodoer.
-bash "ec2-user" do
-  code "sudo sh -c \"%echo \\\"%wheel ALL=(ALL) NOPASSWD: ALL\\\" >> /etc/sudoers\""
+bash "root" do
+  code "echo \"%wheel ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers"
 end
 
 group "wheel" do
