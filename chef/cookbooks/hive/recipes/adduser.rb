@@ -26,17 +26,17 @@ directory "/home/#{node.hadoop.user.name}/.ssh" do
 end
 
 bash "#{node.hadoop.user.name}" do
-  code "aws s3 cp #{node.s3.root_dir}/pems/id_rsa ~/.ssh/id_rsa"
+  code "aws s3 cp #{node.s3.root_dir}/pems/id_rsa /home/#{node.hadoop.user.name}/.ssh/id_rsa"
 end
 
 bash "#{node.hadoop.user.name}" do
-  code "aws s3 cp #{node.s3.root_dir}/pems/id_rsa.pub ~/.ssh/id_rsa.pub"
+  code "aws s3 cp #{node.s3.root_dir}/pems/id_rsa.pub /home/#{node.hadoop.user.name}/.ssh/id_rsa.pub"
 end
 
 bash "#{node.hadoop.user.name}" do
-  code "cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
+  code "cat /home/#{node.hadoop.user.name}/.ssh/id_rsa.pub >> /home/#{node.hadoop.user.name}/.ssh/authorized_keys"
 end
 
 bash "#{node.hadoop.user.name}" do
-  code "chmod 600 ~/.ssh/*"
+  code "chmod 600 /home/#{node.hadoop.user.name}/.ssh/*"
 end
