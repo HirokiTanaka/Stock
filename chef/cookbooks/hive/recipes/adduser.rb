@@ -37,6 +37,6 @@ bash "#{node.hadoop.user.name}" do
   code "cat /home/#{node.hadoop.user.name}/.ssh/id_rsa.pub >> /home/#{node.hadoop.user.name}/.ssh/authorized_keys"
 end
 
-bash "#{node.hadoop.user.name}" do
-  code "chmod 600 /home/#{node.hadoop.user.name}/.ssh/*"
+bash "root" do
+  code "chown hadoop:wheel /home/#{node.hadoop.user.name}/.ssh/*"
 end
