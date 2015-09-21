@@ -6,7 +6,7 @@ execute "download_jdk" do
   user "#{node.hadoop.user.name}"
   group "wheel"
   cwd "/home/#{node.hadoop.user.name}"
-  command "wget --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' http://download.oracle.com/otn-pub/java/jdk/8u60-b27/#{jdk_file_name} -0 #{jdk_file_name}"
+  command "wget --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' http://download.oracle.com/otn-pub/java/jdk/8u60-b27/#{jdk_file_name} -O #{jdk_file_name}"
   not_if { ::File.exists?("/home/#{node.hadoop.user.name}/#{jdk_file_name}") }
 end
 
