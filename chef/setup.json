@@ -1,5 +1,6 @@
 {
   "run_list": [
-    "recipe[hive::adduser]"
+    "recipe[hive::adduser]",
+    "recipe[hive::java]"
   ]
 }
