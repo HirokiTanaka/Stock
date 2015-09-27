@@ -1,19 +1,33 @@
 # install hadoop
-## add cloudera stable repo
-execute "add_repo_for_cloudera" do
-    user "root"
-    group "root"
-    command "wget http://archive-primary.cloudera.com/redhat/cdh/cloudera-stable.repo -O /etc/yum.repos.d/cloudera-stable.repo"
-    not_if { ::File.exists?("/etc/yum.repos.d/cloudera-stable.repo") }
+execute "wget hadoop" do
+  cwd "/tmp"
+  command "wget http://ftp.tsukuba.wide.ad.jp/software/apache/hadoop/common/hadoop-#{node.hadoop.version}/hadoop-#{node.hadoop.version}.tar.gz"
+  user "#{node.hadoop.user.name}"
+  group "wheel"
+  action :run
+  notifies :run, "execute[tar hadoop]", :immediately
+  not_if { File.exists?("#{node.hadoop.install_dir}/hadoop-#{node.hadoop.version}") }
 end
 
-# install hadoop, hadoop-conf-pseudo, hadoop-hive
-%w(
-    hadoop
-    hadoop-conf-pseudo
-    hadoop-hive
-).each do |package_name|
-    package package_name do
-        action :install
-    end
+execute "tar hadoop" do
+  cwd "/tmp"
+  command "tar zxf hadoop-1.2.1.tar.gz"
+  user "#{node.hadoop.user.name}"
+  group "wheel"
+  action :run
+  notifies :run, "execute[move hadoop]", :immediately
+  not_if { File.exists?("#{node.hadoop.install_dir}/hadoop-#{node.hadoop.version}") }
+end
+
+execute "move hadoop" do
+  cwd "/tmp"
+  command <<-_EOF_
+    mv hadoop-#{node.hadoop.version} #{node.hadoop.install_dir}
+    ln -s #{node.hadoop.install_dir}/hadoop-#{node.hadoop.version} #{node.hadoop.install_dir}/hadoop
+    chown -R #{node.hadoop.user.name}:wheel #{node.hadoop.install_dir}/
+  _EOF_
+  user "root"
+  group "root"
+  action :run
+  not_if { File.exists?("#{node['hadoop']['install_dir']}/hadoop-#{node.hadoop.version}") }
 end
