@@ -1,5 +1,6 @@
 var here = require('here').here;
 var moment = require('moment');
+var request = require('sync-request');
 
 var stocks = function() {
 
@@ -34,7 +35,17 @@ var stocks = function() {
     ret += '\n';
     while(0 <= to.diff(from, "days")) {
       var datestr = from.format('YYYY-MM-DD');
-      ret += "ALTER TABLE stocks ADD PARTITION ( dt='" + datestr + "' ) LOCATION '" + location_dir + "/" + datestr + "';\n";
+
+      // skip holiday
+      var holiday = request(
+        'GET',
+        'http://s-proj.com/utils/checkHoliday.php',
+        {"qs": {"opt": "market", "kind": "h", "date": from.format('YYYYMMDD')}}
+      ).getBody() == 'holiday';
+
+      if (!holiday)
+        ret += "ALTER TABLE stocks ADD PARTITION ( dt='" + datestr + "' ) LOCATION '" + location_dir + "/" + datestr + "';\n";
+
       from = from.add(1, 'days');
     }
     return ret;
