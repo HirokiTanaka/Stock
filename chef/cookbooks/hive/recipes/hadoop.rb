@@ -11,7 +11,7 @@ end
 
 execute "tar hadoop" do
   cwd "/tmp"
-  command "tar zxf hadoop-1.2.1.tar.gz"
+  command "tar zxf hadoop-#{node.hadoop.version}.tar.gz"
   user "#{node.hadoop.user.name}"
   group "wheel"
   action :run
