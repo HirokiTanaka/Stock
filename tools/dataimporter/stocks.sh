@@ -9,7 +9,7 @@ fi
 echo "gonna download ${target}..."
 
 is_holiday=`wget -q -O - "http://s-proj.com/utils/checkHoliday.php?opt=market&kind=h&date=${target//-/}" | grep -c "holiday"`
-if [ $is_holiday -e 1 ]; then
+if [ $is_holiday -eq 1 ]; then
   echo "this is a holiday, so i will exit..."
   exit 2
 fi
