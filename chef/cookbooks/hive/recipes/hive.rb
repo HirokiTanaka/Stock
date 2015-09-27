@@ -1,7 +1,7 @@
 # install hive
 execute "wget hive" do
   cwd "/tmp"
-  command "wget http://ftp.tsukuba.wide.ad.jp/software/apache/hive/hive-#{node.hive.version}/hive-#{node.hive.version}.tar.gz"
+  command "wget http://ftp.tsukuba.wide.ad.jp/software/apache/hive/hive-#{node.hive.version}/apache-hive-#{node.hive.version}-bin.tar.gz -O hive-#{node.hive.version}.tar.gz"
   user "#{node.hadoop.user.name}"
   group "wheel"
   action :run
