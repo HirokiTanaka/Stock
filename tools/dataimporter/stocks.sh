@@ -24,7 +24,14 @@ sed -i -e '1,2d' ${workdir}/${target}.csv
 echo 'finished to remove header lines.'
 
 # upload to s3
+time1=`date +%s`
 hadoop fs -mkdir s3n://hirokitanaka-stock/hdfs/data/stocks/${target}
-hadoop fs -put ${workdir}/${target}.csv s3n://hirokitanaka-stock/hdfs/data/stocks/${target}/${target}.csv
+time2=`date +%s`
+diff=$((time2 - time1))
+echo "finished hadoop fs mkdir. (${diff} sec)"
+hadoop fs -copyFromLocal ${workdir}/${target}.csv s3n://hirokitanaka-stock/hdfs/data/stocks/${target}/${target}.csv
 rm ${workdir}/${target}.csv
+time3=`date +%s`
+diff=$((time3 - time2))
+echo "finished hadoop put data csv file. (${diff} sec)"
 
