@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://hadoop01:9000</value>
+  </property>
+  <!-- s3 impl -->
+  <property>
+    <name>fs.s3.impl</name>
+    <value>org.apache.hadoop.fs.s3.S3FileSystem</value>
+  </property>
+  <property>
+    <name>fs.s3n.impl</name>
+    <value>org.apache.hadoop.fs.s3native.NativeS3FileSystem</value>
+  </property>
+</configuration>
