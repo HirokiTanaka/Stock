@@ -37,8 +37,8 @@ end
 # hadoop configurations
 template "#{node.hadoop.install_dir}/hadoop/etc/hadoop/hadoop-env.sh" do
     source "hadoop-env.sh"
-    group "#{node.hadoop.user.name}"
-    owner "wheel"
+    owner "#{node.hadoop.user.name}"
+    group "wheel"
     mode "0644"
 end
 
