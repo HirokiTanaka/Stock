@@ -38,5 +38,8 @@ bash "#{node.hadoop.user.name}" do
 end
 
 bash "root" do
-  code "chown hadoop:wheel /home/#{node.hadoop.user.name}/.ssh/*"
+  code  <<-_EOF_
+    chown hadoop:wheel /home/#{node.hadoop.user.name}/.ssh/*
+    chmod 600 /home/#{node.hadoop.user.name}/.ssh/*
+  _EOF_
 end
