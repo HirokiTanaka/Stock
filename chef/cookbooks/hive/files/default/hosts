@@ -1,0 +1,5 @@
+127.0.0.1   localhost localhost.localdomain
+
+# hadoop settings
+172.31.30.52 hadoop01
+172.31.17.96 hadoop02

@@ -1,0 +1,9 @@
+{
+  "run_list": [
+    "recipe[hive::adduser]",
+    "recipe[hive::java]",
+    "recipe[hive::hadoop]",
+    "recipe[hive::hive]",
+    "recipe[hive::hadoop_conf]"
+  ]
+}
