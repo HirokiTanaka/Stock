@@ -1,7 +1,7 @@
 # prepare hadoop directories
 directory "home/#{node.hadoop.user.name}/dfs/name/" do
-    group "#{node.hadoop.user.name}"
-    owner "wheel"
+    owner "#{node.hadoop.user.name}"
+    group "wheel"
     recursive true
     mode "0755"
     action :create
@@ -9,8 +9,8 @@ directory "home/#{node.hadoop.user.name}/dfs/name/" do
 end
 
 directory "home/#{node.hadoop.user.name}/dfs/data" do
-    group "#{node.hadoop.user.name}"
-    owner "wheel"
+    owner "#{node.hadoop.user.name}"
+    group "wheel"
     recursive true
     mode "0755"
     action :create
@@ -18,8 +18,8 @@ directory "home/#{node.hadoop.user.name}/dfs/data" do
 end
 
 directory "/home/#{node.hadoop.user.name}/mapred" do
-    group "#{node.hadoop.user.name}"
-    owner "wheel"
+    owner "#{node.hadoop.user.name}"
+    group "wheel"
     recursive true
     mode "0755"
     action :create
