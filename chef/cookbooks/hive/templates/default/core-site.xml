@@ -8,19 +8,19 @@
   <!-- s3 impl -->
   <property>
     <name>fs.s3.awsAccessKeyId</name>
-    <value><%= ENV["AWS_ACCESS_KEY_ID"] %></value>
+    <value><%= @aws_access_key_id %></value>
   </property>
   <property>
     <name>fs.s3n.awsAccessKeyId</name>
-    <value><%= ENV["AWS_ACCESS_KEY_ID"] %></value>
+    <value><%= @aws_access_key_id %></value>
   </property>
   <property>
     <name>fs.s3.awsSecretAccessKey</name>
-    <value><%= ENV["AWS_SECRET_ACCESS_KEY"] %></value>
+    <value><%= @aws_secret_access_key %></value>
   </property>
   <property>
     <name>fs.s3n.awsSecretAccessKey</name>
-    <value><%= ENV["AWS_SECRET_ACCESS_KEY"] %></value>
+    <value><%= @aws_secret_access_key %></value>
   </property>
   <property>
     <name>fs.s3.impl</name>

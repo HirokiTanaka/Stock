@@ -42,11 +42,25 @@ template "#{node.hadoop.install_dir}/hadoop/etc/hadoop/hadoop-env.sh" do
     mode "0644"
 end
 
+# set env variables from s3 json formated setting file.
+## install jq
+package "jq" do
+  action :install
+end
+
+## set env variables from a s3 secret file.
+aws_access_key_id=`$(aws s3 cp s3://hirokitanaka-stock/pems/credentials.json - | jq 'map(select( .["User_Name"] = "hadoop"))' | jq -r '.[].Access_Key_Id')`
+aws_secret_access_key=`$(aws s3 cp s3://hirokitanaka-stock/pems/credentials.json - | jq 'map(select( .["User_Name"] = "hadoop"))' | jq -r '.[].Secret_Access_Key')`
+
 template "#{node.hadoop.install_dir}/hadoop/etc/hadoop/core-site.xml" do
   source "core-site.xml"
   owner "#{node.hadoop.user.name}"
   group "wheel"
   mode "0644"
+  variables({
+    :aws_access_key_id => aws_access_key_id,
+    :aws_secret_access_key => aws_secret_access_key
+  })
 end
 
 template "#{node.hadoop.install_dir}/hadoop/etc/hadoop/mapred-site.xml" do
